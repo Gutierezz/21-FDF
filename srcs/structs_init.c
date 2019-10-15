@@ -20,8 +20,10 @@ t_fdf	*fdf_init(t_map *map, char *name)
 	if ((fdf->view = view_init(map->width, map->height)) == NULL)
 		fdf_clear(&fdf, MEM_ALLOC_ERR);
 	fdf->bpp >>= 3;
-	clear_image(fdf);
 	fdf->map = map;
+	if (!(map->z_buffer = (int*)ft_memalloc(sizeof(int) * WIN_W * WIN_H)))
+		fdf_clear(&fdf, MEM_ALLOC_ERR);
+	clear_image(fdf);
 	ft_strdel(&title);
 	return (fdf);
 }
@@ -35,6 +37,7 @@ t_map	*map_init(void)
 	map->height = 0;
 	map->width = 0;
 	map->z_arr = NULL;
+	map->z_buffer = NULL;
 	map->colors = NULL;
 	map->file_data = NULL;
 	map->z_max = INT_MIN;

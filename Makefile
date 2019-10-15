@@ -11,7 +11,8 @@ FLAGS 		= -Wall -Wextra -Werror
 LIB_LINK	= -lm -L $(LIB_DIR) -lft
 MLX_LINK 	= -L $(MLX_DIR) -lmlx -lXext -lX11 #-framework OpenGL -framework AppKit
 
-SRC_FILES 	= main.c draw_map.c image_functions.c structs_init.c structs_clear.c pointlist.c parser.c projection.c rotation.c hook_commands.c key_commands.c
+SRC_FILES 	= main.c draw_map.c image_functions.c structs_init.c structs_clear.c pointlist.c parser.c projection.c rotation.c hook_commands.c key_commands.c \
+				fill_rect.c get_color.c
 
 OBJ_FILES 	= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:%.c=%.o))
 

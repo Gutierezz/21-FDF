@@ -1,6 +1,5 @@
 #include  "fdf.h"
 
-
 int main(int ac, char **av)
 {
 	t_fdf	*fdf;

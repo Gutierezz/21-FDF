@@ -66,6 +66,7 @@ typedef struct			s_map
 	int					*colors;
 	int					z_min;
 	int					z_max;
+	int					*z_buffer;
 }						t_map;
 
 typedef struct			s_view
@@ -131,6 +132,22 @@ void	rotate_point(t_point *point, t_fdf *fdf);
 
 void		bres_line(t_fdf *fdf, t_point p1, t_point p2);
 void		draw_map(t_fdf *fdf);
+
+/*
+**	fill_rect
+*/
+
+void	draw_rect(t_fdf *fdf, int x, int y);
+void	swap_points(t_point *p1, t_point *p2);
+void	fill_triangle(t_point p1, t_point p2, t_point p3, t_fdf *fdf);
+
+/*
+**	get_color
+*/
+int			get_color(t_point current, t_point start, t_point end, t_point delta);
+double		percent(int start, int end, int current);
+int			get_default_color(int z, t_map *map);
+int			get_light(int start, int end, double percentage);
 
 /*
 ** hook_commands

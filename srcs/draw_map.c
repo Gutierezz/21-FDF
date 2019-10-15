@@ -79,10 +79,15 @@ void	draw_map(t_fdf *fdf)
 		x = -1;
 		while (++x < fdf->map->width)
 		{
-			if (y + 1 != fdf->map->height)
-				bres_line(fdf, proj(point(x, y, fdf->map), fdf), proj(point(x, y + 1, fdf->map), fdf));
-			if (x + 1 != fdf->map->width)
-				bres_line(fdf, proj(point(x, y, fdf->map), fdf), proj(point(x + 1, y, fdf->map), fdf));
+			if (fdf->view->proj == ISO && x + 1 != fdf->map->height && y + 1 != fdf->map->width)
+				draw_rect(fdf, x, y);
+			else
+			{
+				if (y + 1 != fdf->map->height)
+					bres_line(fdf, proj(point(x, y, fdf->map), fdf), proj(point(x, y + 1, fdf->map), fdf));
+				if (x + 1 != fdf->map->width)
+					bres_line(fdf, proj(point(x, y, fdf->map), fdf), proj(point(x + 1, y, fdf->map), fdf));
+			}
 		}
 	}
 	put_image(fdf);
