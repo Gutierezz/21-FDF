@@ -54,22 +54,28 @@ int	read_line(char **line_arr, t_map *map)
 
 int	fill_arr_from_list(t_map *map)
 {
-	int			map_size;
 	t_pointlst	*ptr;
+	int			x;
+	int			y;
 
-	map_size = map->width * map->height;
-	if (!(map->z_arr = (int*)ft_memalloc(sizeof(int) * map_size)))
-		return (MEM_ALLOC_ERR);
-	if (!(map->colors = (int*)ft_memalloc(sizeof(int) * map_size)))
+	if (!(map->points = (t_point**)ft_memalloc(sizeof(t_point*) * map->height)) || \
+	!(map->start_z = (int*)ft_memalloc(sizeof(int) * map->width * map->height)))
 		return (MEM_ALLOC_ERR);
 	ptr = map->file_data;
-	while (ptr && map_size > 0)
+	y = map->height;
+	while (y--)
 	{
-		map->z_max = ptr->z > map->z_max ? ptr->z : map->z_max;
-		map->z_min = ptr->z < map->z_min ? ptr->z : map->z_min;
-		map->z_arr[--map_size] = ptr->z;
-		map->colors[map_size] = ptr->color;
-		ptr = ptr->next;
+		x = map->width;
+		if (!(map->points[y] = (t_point*)ft_memalloc(sizeof(t_point) * map->width)))
+			return (MEM_ALLOC_ERR);
+		while (x--)
+		{
+			map->points[y][x] = (t_point){x, y, ptr->z, ptr->color};
+			map->start_z[INDEX(x, y, map->width)] = ptr->z;
+			map->z_max = ptr->z > map->z_max ? ptr->z : map->z_max;
+			map->z_min = ptr->z < map->z_min ? ptr->z : map->z_min;
+			ptr = ptr->next;
+		}
 	}
 	return (0);
 }

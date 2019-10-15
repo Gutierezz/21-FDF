@@ -31,10 +31,23 @@ typedef enum	s_err
 # define MOVE_STEP		10
 # define ROTATE_STEP	0.1
 
+#define	CIRLCE_RAD		6.28319
+
+# define PROJECT		1
+# define MOVE			2
+# define ROTATE			4
+# define SCALE			8
+
 # define TRUE_ISO_ANGLE 0.523599
 # define _2_1_ISO_ANGLE 0.46373398
 
 # define INDEX(x, y, size) (y * size + x)
+
+typedef	struct			s_range
+{
+	int					min;
+	int					max;
+}						t_range;
 
 typedef enum			s_proj
 {
@@ -62,8 +75,8 @@ typedef struct			s_map
 	t_pointlst			*file_data;
 	int					width;
 	int					height;
-	int					*z_arr;
-	int					*colors;
+	t_point				**points;
+	int					*start_z;
 	int					z_min;
 	int					z_max;
 	int					*z_buffer;
@@ -73,9 +86,10 @@ typedef struct			s_view
 {
 	t_proj				proj;
 	int					scale;
-	double				alpha;
-	double				beta;
-	double				gamma;
+	double				h_mult;
+	double				x_rad;
+	double				y_rad;
+	double				z_rad;
 	int					x_offs;
 	int					y_offs;
 }						t_view;
@@ -115,7 +129,8 @@ void	put_image(t_fdf *fdf);
 */
 
 void 		iso_proj(t_point *point, double angle);
-t_point		proj(t_point point, t_fdf *fdf);
+t_point		project(int x, int y, int z, t_fdf *fdf);
+void		apply_changes(t_fdf *fdf);
 
 /*
 ** rotation
@@ -124,7 +139,7 @@ t_point		proj(t_point point, t_fdf *fdf);
 void	x_rotation(t_point *point, double angle);
 void	y_rotation(t_point *point, double angle);
 void	z_rotation(t_point *point, double angle);
-void	rotate_point(t_point *point, t_fdf *fdf);
+void	rotate(t_point *point, t_fdf *fdf);
 
 /*
 **	draw_map
@@ -148,6 +163,10 @@ int			get_color(t_point current, t_point start, t_point end, t_point delta);
 double		percent(int start, int end, int current);
 int			get_default_color(int z, t_map *map);
 int			get_light(int start, int end, double percentage);
+double		lerp(double norm, double min, double max);
+double		norm(double value, double min, double max);
+double		mapp(double value, t_range pixel, t_range comp);
+
 
 /*
 ** hook_commands
@@ -165,6 +184,7 @@ void		move_image(int key, t_fdf *fdf);
 void		set_scale(int key, t_fdf *fdf);
 void		rotate_image(int key, t_fdf *fdf);
 void		set_project_type(int key,t_fdf *fdf);
+void		reset_coordinates(t_fdf *fdf);
 
 /*
 **	structs_init
@@ -172,8 +192,9 @@ void		set_project_type(int key,t_fdf *fdf);
 
 t_fdf		*fdf_init(t_map *map, char *name);
 t_map		*map_init(void);
-t_view		*view_init(int map_w, int map_h);
+t_view		*view_init(t_map *map);
 t_point		point(int x, int y, t_map *map);
+t_range		range(int min, int max);
 
 /*
 **	structs_clear

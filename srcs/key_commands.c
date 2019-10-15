@@ -10,7 +10,6 @@ void		move_image(int key, t_fdf *fdf)
 		fdf->view->x_offs += MOVE_STEP;
 	else if (key == VK_LEFT)
 		fdf->view->x_offs -= MOVE_STEP;
-	draw_map(fdf);
 }
 
 void		set_scale(int key, t_fdf *fdf)
@@ -19,34 +18,38 @@ void		set_scale(int key, t_fdf *fdf)
 		fdf->view->scale -= (fdf->view->scale > 1) ?  1 : 0;
 	else if (key == VK_NUM_PLUS || key == VK_PLUS)
 		fdf->view->scale += (fdf->view->scale < 50) ? 1 : 0;
-	draw_map(fdf);
 }
 
 void		rotate_image(int key, t_fdf *fdf)
 {
+	(void)key;
 	if (key == VK_NUM_2)
-	 	fdf->view->alpha += ROTATE_STEP;
+	 	fdf->view->y_rad += ROTATE_STEP;
 	else if (key == VK_NUM_8)
-	 	fdf->view->alpha -= ROTATE_STEP;
+	 	fdf->view->y_rad -= ROTATE_STEP;
 	else if (key == VK_NUM_6)
-	 	fdf->view->beta += ROTATE_STEP;
+	 	fdf->view->z_rad += ROTATE_STEP;
 	else if (key == VK_NUM_4)
-	 	fdf->view->beta -= ROTATE_STEP;
+	 	fdf->view->z_rad -= ROTATE_STEP;
 	else if (key == VK_NUM_1 || key == VK_NUM_3)
-	 	fdf->view->gamma += ROTATE_STEP;
+	 	fdf->view->x_rad += ROTATE_STEP;
 	else if (key == VK_NUM_7 || key == VK_NUM_9)
-	 	fdf->view->gamma -= ROTATE_STEP;
-	draw_map(fdf);
+	 	fdf->view->x_rad -= ROTATE_STEP;
+	if (fdf->view->x_rad > CIRLCE_RAD || fdf->view->x_rad < -CIRLCE_RAD)
+		fdf->view->x_rad -= fdf->view->x_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
+	if (fdf->view->y_rad > CIRLCE_RAD || fdf->view->y_rad < -CIRLCE_RAD)
+		fdf->view->y_rad -= fdf->view->y_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
+	if (fdf->view->z_rad > CIRLCE_RAD || fdf->view->z_rad < -CIRLCE_RAD)
+		fdf->view->z_rad -= fdf->view->z_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
 }
 
 void		set_project_type(int key,t_fdf *fdf)
 {
-	fdf->view->alpha = 0;
-	fdf->view->beta = 0;
-	fdf->view->gamma = 0;
+	fdf->view->x_rad = 0.0;
+	fdf->view->y_rad = 0.0;
+	fdf->view->z_rad = 0.0;
 	if (key == VK_I)
 		fdf->view->proj = ISO;
 	else if (key == VK_P)
 		fdf->view->proj = PARALLEL;
-	draw_map(fdf);
 }

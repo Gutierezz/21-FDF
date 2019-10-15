@@ -51,7 +51,7 @@ void	bres_line(t_fdf *fdf, t_point point1, t_point p2)
 	err[0] = delta.x - delta.y;
 	while (p1.x != p2.x || p1.y != p2.y)
 	{
-		set_pixel(fdf, p1.x, p1.y, 0xffffff);			// ЦВЕТ ПОМЕНЯТЬ
+		set_pixel(fdf, p1.x, p1.y, 0xFFFFFF);			// ЦВЕТ ПОМЕНЯТЬ
 		err[1] = err[0] * 2;
 		if (err[1] > -delta.y)
 		{
@@ -79,14 +79,14 @@ void	draw_map(t_fdf *fdf)
 		x = -1;
 		while (++x < fdf->map->width)
 		{
-			if (fdf->view->proj == ISO && x + 1 != fdf->map->height && y + 1 != fdf->map->width)
-				draw_rect(fdf, x, y);
-			else
+		//	if (fdf->view->proj == ISO && x + 1 != fdf->map->height && y + 1 != fdf->map->width)
+		/*		draw_rect(fdf, x, y);*/
+	//		else
 			{
 				if (y + 1 != fdf->map->height)
-					bres_line(fdf, proj(point(x, y, fdf->map), fdf), proj(point(x, y + 1, fdf->map), fdf));
+					bres_line(fdf, fdf->map->points[y][x], fdf->map->points[y + 1][x]);
 				if (x + 1 != fdf->map->width)
-					bres_line(fdf, proj(point(x, y, fdf->map), fdf), proj(point(x + 1, y, fdf->map), fdf));
+					bres_line(fdf, fdf->map->points[y][x], fdf->map->points[y][x + 1]);
 			}
 		}
 	}

@@ -7,11 +7,9 @@ void	draw_pixel(t_fdf *fdf, int x, int y, int color)
 
 void	set_pixel(t_fdf *fdf, int x, int y, int color)
 {
-	//ft_printf("SET_PIXEL\n");
 	if ((x < 0 || x >= WIN_W) || (y < 0 || y >= WIN_H))
 		return ;
 	*(int *)(fdf->data + (INDEX(x, y, WIN_W) * fdf->bpp)) = color;
-	//ft_printf("SET_PIXE_DONE\n");
 }
 
 void	clear_image(t_fdf *fdf)

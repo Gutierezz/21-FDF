@@ -14,6 +14,7 @@ int		key_press(int key, void *param)
 	t_fdf	*fdf;
 
 	fdf = (t_fdf*)param;
+	ft_printf("key %d\n", key);
 	if (key == VK_ESC)
 	{
 		fdf_clear(&fdf, 0);
@@ -23,12 +24,14 @@ int		key_press(int key, void *param)
 		move_image(key, fdf);
 	else if (key == VK_MINUS || key == VK_PLUS || key == VK_NUM_PLUS || key == VK_NUM_MINUS)
 		set_scale(key, fdf);
-	else if (key == VK_NUM_1 || key == VK_NUM_2 || key == VK_NUM_3 || key == VK_NUM_4 || \
-		key == VK_NUM_5 || key == VK_NUM_6 || key == VK_NUM_7 || key == VK_NUM_8 || \
+	else if (key == VK_NUM_1 || key == VK_NUM_2 || key == VK_NUM_3 || key == VK_NUM_4 ||
+		key == VK_NUM_5 || key == VK_NUM_6 || key == VK_NUM_7 || key == VK_NUM_8 ||
 		key == VK_NUM_9)
 		rotate_image(key, fdf);
 	else if (key == VK_I || key == VK_P)
 		set_project_type(key, fdf);
+	apply_changes(fdf);
+	draw_map(fdf);
 	return (0);
 }
 

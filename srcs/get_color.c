@@ -57,3 +57,18 @@ int	get_color(t_point current, t_point start, t_point end, t_point delta)
 					percentage);
 	return ((red << 16) | (green << 8) | blue);
 }
+
+double	lerp(double norm, double min, double max)
+{
+	return ((max - min) * norm + min);
+}
+
+double	norm(double value, double min, double max)
+{
+	return ((value - min) / (max - min));
+}
+
+double	mapp(double value, t_range pixel, t_range comp)
+{
+	return (lerp(norm(value, pixel.min, pixel.max), comp.min, comp.max));
+}

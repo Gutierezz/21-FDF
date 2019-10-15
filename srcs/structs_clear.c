@@ -2,11 +2,16 @@
 
 void	map_clear(t_map **map, int err_msg)
 {
+	int y;
+
+	y = -1;
 	ft_printf("MAP_CLEAR!\n");
 	if (*map)
 	{
-		ft_memdel((void**)&(*map)->z_arr);
-		ft_memdel((void**)&(*map)->colors);
+		while (++y < (*map)->height)
+			ft_memdel((void**)&(*map)->points[y]);
+		ft_memdel((void**)&(*map)->points);
+		ft_memdel((void**)&(*map)->start_z);
 		pointlist_clear(&(*map)->file_data);
 		ft_memdel((void**)map);
 	}

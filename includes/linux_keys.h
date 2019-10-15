@@ -25,6 +25,7 @@
 # define VK_P				0x70 //35
 # define VK_C				8
 # define VK_V				9
+# define VK_R				114
 # define VK_PLUS			61
 # define VK_MINUS			45
 

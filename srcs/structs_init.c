@@ -17,7 +17,7 @@ t_fdf	*fdf_init(t_map *map, char *name)
 		fdf_clear(&fdf, IMAGE_INIT_ERR);
 	if ((fdf->data = mlx_get_data_addr(fdf->img, &fdf->bpp, &fdf->line_size, &fdf->endian)) == NULL)
 		fdf_clear(&fdf, DATA_ADDR_ERR);
-	if ((fdf->view = view_init(map->width, map->height)) == NULL)
+	if ((fdf->view = view_init(map)) == NULL)
 		fdf_clear(&fdf, MEM_ALLOC_ERR);
 	fdf->bpp >>= 3;
 	fdf->map = map;
@@ -36,16 +36,15 @@ t_map	*map_init(void)
 		return (NULL);
 	map->height = 0;
 	map->width = 0;
-	map->z_arr = NULL;
+	map->points = NULL;
 	map->z_buffer = NULL;
-	map->colors = NULL;
 	map->file_data = NULL;
 	map->z_max = INT_MIN;
 	map->z_min = INT_MAX;
 	return (map);
 }
 
-t_view	*view_init(int map_w, int map_h)
+t_view	*view_init(t_map *map)
 {
 	t_view *view;
 
@@ -54,21 +53,19 @@ t_view	*view_init(int map_w, int map_h)
 	view->proj = PARALLEL;
 	view->x_offs = 0;
 	view->y_offs = 0;
-	view->alpha = 0;
-	view->beta = 0;
-	view->gamma = 0;
-	view->scale = PF_MIN((WIN_W / map_w / 2), (WIN_H / map_h / 2));
-	view->scale = 4;
+	view->x_rad = 0.0;
+	view->y_rad = 0.0;
+	view->z_rad = 0.0;
+	view->h_mult = (double)(map->z_max - map->z_min) / (double)(WIN_H);
+	view->scale = PF_MIN(WIN_H / map->width, WIN_W / map->height);
 	return (view);
 }
 
-t_point	point(int x, int y, t_map *map)
+t_range		range(int min, int max)
 {
-	t_point p;
+	t_range	range;
 
-	p.x = x;
-	p.y = y;
-	p.z = map->z_arr[INDEX(x, y, map->width)];
-	p.color = map->colors[INDEX(x, y, map->width)];
-	return (p);
+	range.min = min;
+	range.max = max;
+	return (range);
 }
