@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-t_map	*read_map(int fd)
+t_map	*read_map(int fd, t_palette palette)
 {
 	int		brd;
 	char	*line;
@@ -10,8 +10,8 @@ t_map	*read_map(int fd)
 
 	err = 0;
 	line = NULL;
-	if (!(map = map_init()))
-		return (NULL);
+	if (!(map = map_init(palette)))
+		error_message(MEM_ALLOC_ERR);
 	while ((brd = get_next_line2(fd, &line)) > 0)
 	{
 		if (!(line_arr = ft_strsplit(line, ' ')))
@@ -78,4 +78,21 @@ int	fill_arr_from_list(t_map *map)
 		}
 	}
 	return (0);
+}
+
+void	set_colors(t_map *map)
+{
+	int y;
+	int x;
+
+	y = -1;
+	while (++y < map->height)
+	{
+		x = -1;
+		while (++x < map->width)
+		{
+			map->points[y][x].color = palette_color(map->points[y][x].z, \
+			map, map->points[y][x].color);
+		}
+	}
 }

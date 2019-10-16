@@ -14,7 +14,9 @@
 
 typedef enum	s_err
 {
-	MLX_INIT_ERR = 1,
+	INPUT_ERR = 1,
+	PALETTE_ERR,
+	MLX_INIT_ERR,
 	WINDOW_INIT_ERR,
 	IMAGE_INIT_ERR,
 	DATA_ADDR_ERR,
@@ -45,15 +47,40 @@ typedef enum	s_err
 
 typedef	struct			s_range
 {
-	int					min;
-	int					max;
+	double					min;
+	double					max;
 }						t_range;
+
+typedef enum			s_palette
+{
+	DEFAULT,
+	CITRUS,
+	PINK_PURPLE,
+	MARCEL
+}						t_palette;
 
 typedef enum			s_proj
 {
 	PARALLEL,
 	ISO
 }						t_proj;
+
+typedef struct			s_line
+{
+	int 				src_x;
+	int					src_y;
+	int					dst_x;
+	int					dst_y;
+	int					dx;
+	int					dy;
+	int					step_x;
+	int					step_y;
+	int					x;
+	int					y;
+	double				progress;
+	int					err_1;
+	int					err_2;
+}						t_line;
 
 typedef struct			s_pointlst
 {
@@ -72,21 +99,23 @@ typedef struct			s_point
 
 typedef struct			s_map
 {
+	t_palette			palette;
 	t_pointlst			*file_data;
 	int					width;
 	int					height;
 	t_point				**points;
 	int					*start_z;
+	int					*colors;
 	int					z_min;
 	int					z_max;
-	int					*z_buffer;
+	int					*z_buff;
 }						t_map;
 
 typedef struct			s_view
 {
 	t_proj				proj;
 	int					scale;
-	double				h_mult;
+	int					h_scale;
 	double				x_rad;
 	double				y_rad;
 	double				z_rad;
@@ -111,9 +140,10 @@ typedef struct			s_fdf
 ** parser
 */
 
-t_map	*read_map(int fd);
+t_map	*read_map(int fd, t_palette palette);
 int		read_line(char **line_arr, t_map *map);
 int		fill_arr_from_list(t_map *map);
+void	set_colors(t_map *map);
 
 /*
 ** image_functions
@@ -129,7 +159,7 @@ void	put_image(t_fdf *fdf);
 */
 
 void 		iso_proj(t_point *point, double angle);
-t_point		project(int x, int y, int z, t_fdf *fdf);
+void		scale(t_point *point, t_fdf *fdf);
 void		apply_changes(t_fdf *fdf);
 
 /*
@@ -145,6 +175,7 @@ void	rotate(t_point *point, t_fdf *fdf);
 **	draw_map
 */
 
+t_line		line_init(t_point p1, t_point p2);
 void		bres_line(t_fdf *fdf, t_point p1, t_point p2);
 void		draw_map(t_fdf *fdf);
 
@@ -159,21 +190,21 @@ void	fill_triangle(t_point p1, t_point p2, t_point p3, t_fdf *fdf);
 /*
 **	get_color
 */
-int			get_color(t_point current, t_point start, t_point end, t_point delta);
-double		percent(int start, int end, int current);
-int			get_default_color(int z, t_map *map);
-int			get_light(int start, int end, double percentage);
+int			palette_color(int z, t_map *map, int color);
+int			color_lerp(t_line line, int src_color, int dst_color);
 double		lerp(double norm, double min, double max);
 double		norm(double value, double min, double max);
-double		mapp(double value, t_range pixel, t_range comp);
+double		mapp(double value, t_range src, t_range dst);
+
+int	get_light(int start, int end, double percentage); // DELETE
 
 
 /*
 ** hook_commands
 */
 
-int			close_window(void *param);
-int			key_press(int key, void *param);
+int			close_window(t_fdf *fdf);
+int			key_press(int key, t_fdf *fdf);
 void		hook_commands(t_fdf *fdf);
 
 /*
@@ -184,17 +215,17 @@ void		move_image(int key, t_fdf *fdf);
 void		set_scale(int key, t_fdf *fdf);
 void		rotate_image(int key, t_fdf *fdf);
 void		set_project_type(int key,t_fdf *fdf);
-void		reset_coordinates(t_fdf *fdf);
+void		manage_height(int key, t_fdf *fdf);
 
 /*
 **	structs_init
 */
 
 t_fdf		*fdf_init(t_map *map, char *name);
-t_map		*map_init(void);
+t_map		*map_init(t_palette palette);
 t_view		*view_init(t_map *map);
-t_point		point(int x, int y, t_map *map);
-t_range		range(int min, int max);
+int			*init_colors(t_palette palette);
+t_range		range(double min, double max);
 
 /*
 **	structs_clear

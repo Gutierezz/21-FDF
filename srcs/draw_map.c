@@ -1,67 +1,62 @@
 #include "fdf.h"
 
-// void	swap_coord(t_coord *p1, t_coord *p2)
-// {
-// 	t_coord tmp;
-
-// 	tmp.x = p1->x;
-// 	tmp.y = p1->y;
-// 	p1->x = p2->x;
-// 	p1->y = p2->y;
-// 	p2->x = tmp.x;
-// 	p2->y = tmp.y;
-// }
-
-// void	wu_line(t_fdf *fdf, t_coord p1, t_coord p2)
-// {
-// 	t_coord	d;
-
-// 	d.x = (p2.x > p1.x) ? (p2.x - p1.x) : (p1.x - p2.x);
-//     d.y = (p2.y > p1.y) ? (p2.y - p1.y) : (p1.y - p2.y);
-// 	if (d.x == 0 || d.y == 0)
-// 		//draw_simple
-// 	if (d.y < d.x)
-// 	{
-// 		if (p2.x < p1.x)
-// 			swap_coord(&p1, &p2);
-// 		float grad = (float)d.y / d.x;
-// 		float intery = p1.y + grad;
-// 		draw_pixel(fdf, p1.x, p1.y , 0xffffff);
-// 	}
-// 	else
-// 	{
-// 		if (p2.y < p1.y)
-// 			swap_coord(&p1, &p2);
-// 	}
-
-// }
-
-void	bres_line(t_fdf *fdf, t_point point1, t_point p2)
+t_line	line_init(t_point p1, t_point p2)
 {
-	t_point	delta;
-	t_point step;
-	t_point	p1;
-	int		err[2];
+	t_line line;
 
-	p1 = point1;
-	step.x = (p1.x < p2.x) ? 1 : -1;
-	step.y = (p1.y < p2.y) ? 1 : -1;
-	delta.x = abs(p2.x - p1.x);
-    delta.y = abs(p2.y - p1.y);
-	err[0] = delta.x - delta.y;
-	while (p1.x != p2.x || p1.y != p2.y)
+	line.src_x = p1.x;
+	line.dst_x = p2.x;
+	line.src_y = p1.y;
+	line.dst_y = p2.y;
+	line.x = p1.x;
+	line.y = p1.y;
+	line.dx = abs(p2.x - p1.x);
+	line.dy = abs(p2.y - p1.y);
+	line.step_x = p1.x < p2.x ? 1 : -1;
+	line.step_y = p1.y < p2.y ? 1 : -1;
+	line.err_1 = line.dx - line.dy;
+	line.progress = 0.0;
+	return (line);
+}
+
+
+int		is_visible(t_line l, t_fdf *fdf,t_point p1, t_point p2)
+{
+	int	z_val;
+
+	if (l.x >= 0 && l.x < WIN_W && l.y >= 0 && l.y < WIN_H)
 	{
-		set_pixel(fdf, p1.x, p1.y, 0xFFFFFF);			// ЦВЕТ ПОМЕНЯТЬ
-		err[1] = err[0] * 2;
-		if (err[1] > -delta.y)
+		z_val = (int)lerp(l.progress, p1.z, p2.z);
+		if (z_val > fdf->map->z_buff[INDEX(l.x, l.y, WIN_W)])
 		{
-			err[0] -= delta.y;
-			p1.x += step.x;
+			fdf->map->z_buff[INDEX(l.x, l.y, WIN_W)] = z_val;
+			return (1);
 		}
-		if (err[1] < delta.x)
+	}
+	return (0);
+}
+
+void	bres_line(t_fdf *fdf, t_point p1, t_point p2)
+{
+	t_line l;
+
+	l = line_init(p1, p2);
+	while (l.x != p2.x || l.y != p2.y)
+	{
+		l.progress = (l.dx > l.dy) ? norm(l.x, l.src_x, l.dst_x) : \
+									 norm(l.y, l.src_y, l.dst_y);
+		if (is_visible(l, fdf, p1, p2))
+			set_pixel(fdf, l.x, l.y, color_lerp(l, p1.color, p2.color));
+		l.err_2 = l.err_1 * 2;
+		if (l.err_2 > -l.dy)
 		{
-			err[0] += delta.x;
-			p1.y += step.y;
+			l.err_1 -= l.dy;
+			l.x += l.step_x;
+		}
+		if (l.err_2 < l.dx)
+		{
+			l.err_1 += l.dx;
+			l.y += l.step_y;
 		}
 	}
 }
@@ -71,7 +66,7 @@ void	draw_map(t_fdf *fdf)
 	int	x;
 	int	y;
 
-	ft_printf("draw map\n");
+//	ft_printf("draw map\n");
 	clear_image(fdf);
 	y = -1;
 	while (++y < fdf->map->height)

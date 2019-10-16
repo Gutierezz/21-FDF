@@ -17,7 +17,7 @@ void		set_scale(int key, t_fdf *fdf)
 	if (key == VK_NUM_MINUS || key == VK_MINUS)
 		fdf->view->scale -= (fdf->view->scale > 1) ?  1 : 0;
 	else if (key == VK_NUM_PLUS || key == VK_PLUS)
-		fdf->view->scale += (fdf->view->scale < 50) ? 1 : 0;
+		fdf->view->scale += (fdf->view->scale < 100) ? 1 : 0;
 }
 
 void		rotate_image(int key, t_fdf *fdf)
@@ -35,12 +35,12 @@ void		rotate_image(int key, t_fdf *fdf)
 	 	fdf->view->x_rad += ROTATE_STEP;
 	else if (key == VK_NUM_7 || key == VK_NUM_9)
 	 	fdf->view->x_rad -= ROTATE_STEP;
-	if (fdf->view->x_rad > CIRLCE_RAD || fdf->view->x_rad < -CIRLCE_RAD)
-		fdf->view->x_rad -= fdf->view->x_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
-	if (fdf->view->y_rad > CIRLCE_RAD || fdf->view->y_rad < -CIRLCE_RAD)
-		fdf->view->y_rad -= fdf->view->y_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
-	if (fdf->view->z_rad > CIRLCE_RAD || fdf->view->z_rad < -CIRLCE_RAD)
-		fdf->view->z_rad -= fdf->view->z_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
+	// if (fdf->view->x_rad > CIRLCE_RAD || fdf->view->x_rad < -CIRLCE_RAD)
+	// 	fdf->view->x_rad -= fdf->view->x_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
+	// if (fdf->view->y_rad > CIRLCE_RAD || fdf->view->y_rad < -CIRLCE_RAD)
+	// 	fdf->view->y_rad -= fdf->view->y_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
+	// if (fdf->view->z_rad > CIRLCE_RAD || fdf->view->z_rad < -CIRLCE_RAD)
+	// 	fdf->view->z_rad -= fdf->view->z_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
 }
 
 void		set_project_type(int key,t_fdf *fdf)
@@ -52,4 +52,13 @@ void		set_project_type(int key,t_fdf *fdf)
 		fdf->view->proj = ISO;
 	else if (key == VK_P)
 		fdf->view->proj = PARALLEL;
+}
+
+
+void		manage_height(int key, t_fdf *fdf)
+{
+	 if (key == VK_NUM_PLUS)
+	 	fdf->view->h_scale += (fdf->view->h_scale > 50) ? 0 : 1;
+	 if (key == VK_NUM_MINUS)
+	 	fdf->view->h_scale -= (fdf->view->h_scale < 2) ? 0 : 1;
 }

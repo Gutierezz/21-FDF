@@ -11,19 +11,11 @@ void    iso_proj(t_point *point, double angle)
     point->y = (prev_x + prev_y) * sin(angle) - (point->z);
 }
 
-t_point	project(int x, int y, int z, t_fdf *fdf)
+void	scale(t_point *point, t_fdf *fdf)
 {
-	t_point point;
-
-	point.x = x * fdf->view->scale;
-	point.y = y * fdf->view->scale;
-	point.z = z * fdf->view->scale;
-	rotate(&point, fdf);
-	if (fdf->view->proj == ISO)
-		iso_proj(&point, _2_1_ISO_ANGLE);
-	point.x += fdf->view->x_offs;
-	point.y += fdf->view->y_offs;
-	return (point);
+	point->x *= fdf->view->scale;
+	point->y *= fdf->view->scale;
+	point->z *=	fdf->view->h_scale;
 }
 
 void	apply_changes(t_fdf *fdf)
@@ -37,9 +29,15 @@ void	apply_changes(t_fdf *fdf)
 		x = -1;
 		while (++x < fdf->map->width)
 		{
-			fdf->map->points[y][x] = project(x - fdf->map->width / 2, y - fdf->map->height / 2, fdf->map->start_z[INDEX(x, y, \
-			fdf->map->width)], fdf);
-			//ft_printf("%d %d %d \n", fdf->map->points[y][x].x, fdf->map->points[y][x].y, fdf->map->points[y][x].z);
+			fdf->map->points[y][x].x = x - fdf->map->width / 2;
+			fdf->map->points[y][x].y = y - fdf->map->height / 2;
+			fdf->map->points[y][x].z = fdf->map->start_z[INDEX(x, y, fdf->map->width)];
+			scale(&fdf->map->points[y][x], fdf);
+			rotate(&fdf->map->points[y][x], fdf);
+			if (fdf->view->proj == ISO)
+				iso_proj(&fdf->map->points[y][x], _2_1_ISO_ANGLE);
+			fdf->map->points[y][x].x += fdf->view->x_offs;
+			fdf->map->points[y][x].y += fdf->view->y_offs;
 		}
 	}
 }

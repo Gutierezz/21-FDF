@@ -14,7 +14,13 @@ void	set_pixel(t_fdf *fdf, int x, int y, int color)
 
 void	clear_image(t_fdf *fdf)
 {
-	ft_bzero(fdf->map->z_buffer, WIN_W * WIN_H);
+	int i;
+	int size;
+
+	i = -1;
+	size = WIN_W * WIN_H;
+	while (++i < size)
+		fdf->map->z_buff[i] = INT_MIN;
 	ft_bzero(fdf->data, WIN_W * WIN_H * fdf->bpp);
 }
 

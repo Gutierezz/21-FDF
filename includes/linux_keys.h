@@ -1,13 +1,6 @@
 #ifndef LINUX_KEYS_H
 # define LINUX_KEYS_H
 
-# define COLOR_DISCO		0x9A1F6A
-# define COLOR_BRICK_RED	0xC2294E
-# define COLOR_FLAMINGO		0xEC4B27
-# define COLOR_JAFFA		0xEF8633
-# define COLOR_SAFFRON		0xF3AF3D
-
-
 # define MOUSE_LEFT			1
 # define MOUSE_RIGHT		2
 # define SCROLL_UP			4
@@ -39,7 +32,7 @@
 # define VK_NUM_7			0xff95
 # define VK_NUM_8			0xff97
 # define VK_NUM_9			0xff9a
-# define VK_NUM_PLUS		69
-# define VK_NUM_MINUS		78
+# define VK_NUM_PLUS		65451
+# define VK_NUM_MINUS		65453
 
 #endif
