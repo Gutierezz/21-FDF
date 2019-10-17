@@ -16,7 +16,7 @@
 # define VK_ESC				0xff1b
 # define VK_I				0x69
 # define VK_P				0x70 //35
-# define VK_C				8
+# define VK_C				99
 # define VK_V				9
 # define VK_R				114
 # define VK_PLUS			61

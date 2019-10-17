@@ -5,7 +5,6 @@ void	map_clear(t_map **map, int err_msg)
 	int y;
 
 	y = -1;
-	ft_printf("MAP_CLEAR!\n");
 	if (*map)
 	{
 		if ((*map)->points)
@@ -14,12 +13,11 @@ void	map_clear(t_map **map, int err_msg)
 				ft_memdel((void**)&(*map)->points[y]);
 			ft_memdel((void**)&(*map)->points);
 		}
-		ft_printf("MAP_CLEAR2!\n");
+		if ((*map)->colors)
+			ft_memdel((void**)&(*map)->colors);
 		if ((*map)->start_z)
 			ft_memdel((void**)&(*map)->start_z);
-		ft_printf("MAP_CLEAR3!\n");
 		pointlist_clear(&(*map)->file_data);
-		ft_printf("MAP_CLEAR4!\n");
 		ft_memdel((void**)map);
 	}
 	if (err_msg)
@@ -36,8 +34,8 @@ void	fdf_clear(t_fdf **fdf, int err_msg)
 			mlx_destroy_image((*fdf)->mlx, (*fdf)->img);
 		if ((*fdf)->win)
 			mlx_destroy_window((*fdf)->mlx, (*fdf)->win);
-		//ft_memdel((void**)&(*fdf)->data);
-		//ft_memdel((void**)&(*fdf)->img);
+		// ft_memdel((void**)&(*fdf)->data);
+		// ft_memdel((void**)&(*fdf)->img);
 		ft_memdel((void**)&(*fdf)->view);
 		ft_memdel((void**)&(*fdf)->mlx);
 		ft_memdel((void**)fdf);
@@ -71,6 +69,6 @@ void		error_message(int err)
 	if (err == NO_SUCH_FILE)
 		ft_fprintf(2, "Error : Map doesn't exist\n");
 	if (err ==	EMPTY_FILE)
-		ft_fprintf(2, "Error : Map is empty\n");
+		ft_fprintf(2, "Error : Map is empty or has inly one point\n");
 	exit (err);
 }

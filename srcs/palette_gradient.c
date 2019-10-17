@@ -19,18 +19,13 @@ int	palette_color(int z, t_map *map, int color)
 		return (map->colors[4]);
 }
 
-int	color_lerp(t_line line, int src_color, int dst_color)
+int	clerp(t_range coord_range, int pos, int src_color, int dst_color)
 {
 	int		color;
-	double	pos;
-	t_range coord_range;
 
 	color = 0;
 	if (src_color == dst_color)
 		return (dst_color);
-	coord_range = (line.dx > line.dy) ? range((double)line.src_x, (double)line.dst_x) : \
-	 range((double)line.src_y, (double)line.dst_y);
-	pos = (double)(line.dx > line.dy) ? line.x : line.y;
 	color |= (int)mapp(pos, coord_range, \
 	range((double)(src_color >> 16), (double)(dst_color >> 16))) << 16;
 	color |= (int)mapp(pos, coord_range, \
@@ -49,6 +44,8 @@ double	lerp(double norm, double min, double max)
 
 double	norm(double value, double min, double max)
 {
+	if (min == max)
+		return (0.0);
 	return ((value - min) / (max - min));
 }
 

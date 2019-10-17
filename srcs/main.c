@@ -36,8 +36,9 @@ int main(int ac, char **av)
 	fd = 0;
 	palette = handle_args(ac, av, &fd);
 	map = read_map(fd, palette);
-	if ((err = fill_arr_from_list(map)))
-		map_clear(&map, err);
+	if ((map->width < 2 && map->height < 2) || \
+	(err = fill_arr_from_list(map)))
+		map_clear(&map, err ? err : EMPTY_FILE);
 	set_colors(map);
 	fdf = fdf_init(map, av[1]);
 	hook_commands(fdf);

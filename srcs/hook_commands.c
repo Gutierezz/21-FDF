@@ -6,12 +6,8 @@ int		close_window(t_fdf *fdf)
 	exit(0);
 }
 
-
-
-
 int		key_press(int key, t_fdf *fdf)
 {
-//	ft_printf("key %d\n", key);
 	if (key == VK_ESC)
 	{
 		fdf_clear(&fdf, 0);

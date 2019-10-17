@@ -29,7 +29,7 @@ typedef enum	s_err
 }				t_err;
 
 # define WIN_W			800
-# define WIN_H			600
+# define WIN_H			800
 # define MOVE_STEP		10
 # define ROTATE_STEP	0.1
 
@@ -77,10 +77,21 @@ typedef struct			s_line
 	int					step_y;
 	int					x;
 	int					y;
+	int					z_val;
 	double				progress;
 	int					err_1;
 	int					err_2;
 }						t_line;
+
+typedef struct			s_border
+{
+	int					x0;
+	int					x1;
+	int					z0;
+	int					z1;
+	int					color0;
+	int					color1;
+}						t_border;
 
 typedef struct			s_pointlst
 {
@@ -176,22 +187,15 @@ void	rotate(t_point *point, t_fdf *fdf);
 */
 
 t_line		line_init(t_point p1, t_point p2);
+int			is_visible(int x, int y, int z_val, t_fdf *fdf);
 void		bres_line(t_fdf *fdf, t_point p1, t_point p2);
 void		draw_map(t_fdf *fdf);
-
-/*
-**	fill_rect
-*/
-
-void	draw_rect(t_fdf *fdf, int x, int y);
-void	swap_points(t_point *p1, t_point *p2);
-void	fill_triangle(t_point p1, t_point p2, t_point p3, t_fdf *fdf);
 
 /*
 **	get_color
 */
 int			palette_color(int z, t_map *map, int color);
-int			color_lerp(t_line line, int src_color, int dst_color);
+int			clerp(t_range coord_range, int pos, int src_color, int dst_color);
 double		lerp(double norm, double min, double max);
 double		norm(double value, double min, double max);
 double		mapp(double value, t_range src, t_range dst);

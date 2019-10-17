@@ -58,7 +58,7 @@ void		set_project_type(int key,t_fdf *fdf)
 void		manage_height(int key, t_fdf *fdf)
 {
 	 if (key == VK_NUM_PLUS)
-	 	fdf->view->h_scale += (fdf->view->h_scale > 50) ? 0 : 1;
+	 	fdf->view->h_scale += (fdf->view->h_scale > 100) ? 0 : 1;
 	 if (key == VK_NUM_MINUS)
 	 	fdf->view->h_scale -= (fdf->view->h_scale < 2) ? 0 : 1;
 }

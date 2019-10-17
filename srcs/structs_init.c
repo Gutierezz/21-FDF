@@ -61,8 +61,8 @@ t_view	*view_init(t_map *map)
 	view->y_rad = 0.0;
 	view->z_rad = 0.0;
 	view->scale = PF_MIN(WIN_H / map->width, WIN_W / map->height);
-	view->h_scale = view->scale / (map->z_max - map->z_min) + 1;
-	ft_printf("hmult %d, \n", view->h_scale);
+	view->h_scale = (map->z_max == map->z_min) ? 1 : \
+		view->scale / (map->z_max - map->z_min) + 1;
 	return (view);
 }
 
