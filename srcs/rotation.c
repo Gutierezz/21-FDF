@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:37 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:38:39 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/17 20:30:10 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	x_rotation(t_point *point, double angle)
 	int	old_y;
 
 	old_y = point->y;
-	point->y = old_y * cos(angle) - point->z * sin(angle);
-	point->z = old_y * sin(angle) + point->z * cos(angle);
+	point->y = old_y * cos(angle) + point->z * sin(angle);
+	point->z = -old_y * sin(angle) + point->z * cos(angle);
 }
 
 void	y_rotation(t_point *point, double angle)

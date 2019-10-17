@@ -6,17 +6,12 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:37:01 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:37:05 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/17 17:13:35 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYS_H
 # define KEYS_H
-
-// # define MOUSE_LEFT			1
-// # define MOUSE_RIGHT		2
-// # define SCROLL_UP			4
-// # define SCROLL_DOWN		5
 
 # define VK_UP				126
 # define VK_DOWN			125

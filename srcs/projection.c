@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:29 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:40:58 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/17 17:53:03 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	scale(t_point *point, t_fdf *fdf)
 {
 	point->x *= fdf->view->scale;
 	point->y *= fdf->view->scale;
-	point->z *=	fdf->view->h_scale;
+	point->z *= fdf->view->h_scale;
 }
 
 void	apply_changes(t_fdf *fdf)

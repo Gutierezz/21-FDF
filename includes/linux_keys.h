@@ -5,8 +5,6 @@
 # define MOUSE_RIGHT		2
 # define SCROLL_UP			4
 # define SCROLL_DOWN		5
-// # define MOUSE_SCROLL_LEFT	6
-// # define MOUSE_SCROLL_RIGHT	7
 
 # define VK_UP				0xff52
 # define VK_DOWN			0xff54

@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:37:26 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:47:41 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/17 15:09:38 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,12 @@ typedef enum	s_err
 	EMPTY_FILE
 }				t_err;
 
-# define WIN_W			800
-# define WIN_H			800
+# define WIN_W			1000
+# define WIN_H			1000
 # define MOVE_STEP		10
 # define ROTATE_STEP	0.1
 
 #define	CIRLCE_RAD		6.28319
-
-# define PROJECT		1
-# define MOVE			2
-# define ROTATE			4
-# define SCALE			8
 
 # define TRUE_ISO_ANGLE 0.523599
 # define _2_1_ISO_ANGLE 0.46373398
