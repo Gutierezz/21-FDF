@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs_clear.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:38:43 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:40:19 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void	map_clear(t_map **map, int err_msg)
 {
-	int y;
+	int	y;
 
 	y = -1;
 	if (*map)
@@ -44,7 +56,7 @@ void	fdf_clear(t_fdf **fdf, int err_msg)
 		error_message(err_msg);
 }
 
-void		error_message(int err)
+void	error_message(int err)
 {
 	if (err == INPUT_ERR)
 		ft_fprintf(2, "Usage: ./fdf file_name OPTIONAL : palette('-p[1-3]')");
@@ -68,7 +80,7 @@ void		error_message(int err)
 		ft_fprintf(2, "Error : Map has lines with different length\n");
 	if (err == NO_SUCH_FILE)
 		ft_fprintf(2, "Error : Map doesn't exist\n");
-	if (err ==	EMPTY_FILE)
+	if (err == EMPTY_FILE)
 		ft_fprintf(2, "Error : Map is empty or has inly one point\n");
-	exit (err);
+	exit(err);
 }

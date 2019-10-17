@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structs_init.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:38:49 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:39:30 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-t_fdf	*fdf_init(t_map *map, char *name)
+t_fdf		*fdf_init(t_map *map, char *name)
 {
 	t_fdf	*fdf;
 	char	*title;
@@ -15,7 +27,8 @@ t_fdf	*fdf_init(t_map *map, char *name)
 		fdf_clear(&fdf, WINDOW_INIT_ERR);
 	if ((fdf->img = mlx_new_image(fdf->mlx, WIN_W, WIN_H)) == NULL)
 		fdf_clear(&fdf, IMAGE_INIT_ERR);
-	if ((fdf->data = mlx_get_data_addr(fdf->img, &fdf->bpp, &fdf->line_size, &fdf->endian)) == NULL)
+	if ((fdf->data = mlx_get_data_addr(fdf->img, &fdf->bpp, &fdf->line_size, \
+		&fdf->endian)) == NULL)
 		fdf_clear(&fdf, DATA_ADDR_ERR);
 	if ((fdf->view = view_init(map)) == NULL)
 		fdf_clear(&fdf, MEM_ALLOC_ERR);
@@ -28,7 +41,7 @@ t_fdf	*fdf_init(t_map *map, char *name)
 	return (fdf);
 }
 
-t_map	*map_init(t_palette palette)
+t_map		*map_init(t_palette palette)
 {
 	t_map	*map;
 
@@ -48,9 +61,9 @@ t_map	*map_init(t_palette palette)
 	return (map);
 }
 
-t_view	*view_init(t_map *map)
+t_view		*view_init(t_map *map)
 {
-	t_view *view;
+	t_view	*view;
 
 	if (!(view = (t_view*)ft_memalloc(sizeof(t_view))))
 		return (NULL);
@@ -75,9 +88,9 @@ t_range		range(double min, double max)
 	return (range);
 }
 
-int		*init_colors(t_palette palette)
+int			*init_colors(t_palette palette)
 {
-	int *colors;
+	int		*colors;
 
 	if (!(colors = (int*)ft_memalloc(sizeof(int) * 5)))
 		return (NULL);

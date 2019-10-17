@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:37:40 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:49:55 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-t_line	line_init(t_point p1, t_point p2)
+t_line		line_init(t_point p1, t_point p2)
 {
-	t_line line;
+	t_line	line;
 
 	line.src_x = p1.x;
 	line.dst_x = p2.x;
@@ -19,8 +31,7 @@ t_line	line_init(t_point p1, t_point p2)
 	return (line);
 }
 
-
-int		is_visible(int x, int y, int z_val, t_fdf *fdf)
+int			is_visible(int x, int y, int z_val, t_fdf *fdf)
 {
 	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
@@ -33,7 +44,7 @@ int		is_visible(int x, int y, int z_val, t_fdf *fdf)
 	return (0);
 }
 
-void	bres_line(t_fdf *fdf, t_point p1, t_point p2)
+void		bres_line(t_fdf *fdf, t_point p1, t_point p2)
 {
 	t_line	l;
 
@@ -41,7 +52,7 @@ void	bres_line(t_fdf *fdf, t_point p1, t_point p2)
 	while (l.x != p2.x || l.y != p2.y)
 	{
 		l.progress = (l.dx > l.dy) ? norm(l.x, l.src_x, l.dst_x) : \
-									 norm(l.y, l.src_y, l.dst_y);
+									norm(l.y, l.src_y, l.dst_y);
 		l.z_val = (int)lerp(l.progress, p1.z, p2.z);
 		if (is_visible(l.x, l.y, l.z_val, fdf))
 			set_pixel(fdf, l.x, l.y, (l.dx > l.dy) ? \
@@ -61,10 +72,10 @@ void	bres_line(t_fdf *fdf, t_point p1, t_point p2)
 	}
 }
 
-void	draw_map(t_fdf *fdf)
+void		draw_map(t_fdf *fdf)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	clear_image(fdf);
 	y = -1;
@@ -74,9 +85,11 @@ void	draw_map(t_fdf *fdf)
 		while (++x < fdf->map->width)
 		{
 			if (y + 1 != fdf->map->height)
-				bres_line(fdf, fdf->map->points[y][x], fdf->map->points[y + 1][x]);
+				bres_line(fdf, fdf->map->points[y][x], \
+				fdf->map->points[y + 1][x]);
 			if (x + 1 != fdf->map->width)
-				bres_line(fdf, fdf->map->points[y][x], fdf->map->points[y][x + 1]);
+				bres_line(fdf, fdf->map->points[y][x], \
+				fdf->map->points[y][x + 1]);
 		}
 	}
 	put_image(fdf);

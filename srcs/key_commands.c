@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_commands.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:38:05 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:52:16 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 void		move_image(int key, t_fdf *fdf)
@@ -15,7 +27,7 @@ void		move_image(int key, t_fdf *fdf)
 void		set_scale(int key, t_fdf *fdf)
 {
 	if (key == VK_NUM_MINUS || key == VK_MINUS)
-		fdf->view->scale -= (fdf->view->scale > 1) ?  1 : 0;
+		fdf->view->scale -= (fdf->view->scale > 1) ? 1 : 0;
 	else if (key == VK_NUM_PLUS || key == VK_PLUS)
 		fdf->view->scale += (fdf->view->scale < 100) ? 1 : 0;
 }
@@ -24,17 +36,17 @@ void		rotate_image(int key, t_fdf *fdf)
 {
 	(void)key;
 	if (key == VK_NUM_2)
-	 	fdf->view->y_rad += ROTATE_STEP;
+		fdf->view->y_rad += ROTATE_STEP;
 	else if (key == VK_NUM_8)
-	 	fdf->view->y_rad -= ROTATE_STEP;
+		fdf->view->y_rad -= ROTATE_STEP;
 	else if (key == VK_NUM_6)
-	 	fdf->view->z_rad += ROTATE_STEP;
+		fdf->view->z_rad += ROTATE_STEP;
 	else if (key == VK_NUM_4)
-	 	fdf->view->z_rad -= ROTATE_STEP;
+		fdf->view->z_rad -= ROTATE_STEP;
 	else if (key == VK_NUM_1 || key == VK_NUM_3)
-	 	fdf->view->x_rad += ROTATE_STEP;
+		fdf->view->x_rad += ROTATE_STEP;
 	else if (key == VK_NUM_7 || key == VK_NUM_9)
-	 	fdf->view->x_rad -= ROTATE_STEP;
+		fdf->view->x_rad -= ROTATE_STEP;
 	// if (fdf->view->x_rad > CIRLCE_RAD || fdf->view->x_rad < -CIRLCE_RAD)
 	// 	fdf->view->x_rad -= fdf->view->x_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
 	// if (fdf->view->y_rad > CIRLCE_RAD || fdf->view->y_rad < -CIRLCE_RAD)
@@ -54,11 +66,10 @@ void		set_project_type(int key,t_fdf *fdf)
 		fdf->view->proj = PARALLEL;
 }
 
-
 void		manage_height(int key, t_fdf *fdf)
 {
-	 if (key == VK_NUM_PLUS)
-	 	fdf->view->h_scale += (fdf->view->h_scale > 100) ? 0 : 1;
-	 if (key == VK_NUM_MINUS)
-	 	fdf->view->h_scale -= (fdf->view->h_scale < 2) ? 0 : 1;
+	if (key == VK_NUM_PLUS)
+		fdf->view->h_scale += (fdf->view->h_scale > 100) ? 0 : 1;
+	if (key == VK_NUM_MINUS)
+		fdf->view->h_scale -= (fdf->view->h_scale < 2) ? 0 : 1;
 }

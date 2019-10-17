@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   palette_gradient.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:38:15 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:53:41 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-int	palette_color(int z, t_map *map, int color)
+int		palette_color(int z, t_map *map, int color)
 {
 	double	normal;
 
@@ -19,9 +31,9 @@ int	palette_color(int z, t_map *map, int color)
 		return (map->colors[4]);
 }
 
-int	clerp(t_range coord_range, int pos, int src_color, int dst_color)
+int		clerp(t_range coord_range, int pos, int src_color, int dst_color)
 {
-	int		color;
+	int	color;
 
 	color = 0;
 	if (src_color == dst_color)
@@ -29,7 +41,8 @@ int	clerp(t_range coord_range, int pos, int src_color, int dst_color)
 	color |= (int)mapp(pos, coord_range, \
 	range((double)(src_color >> 16), (double)(dst_color >> 16))) << 16;
 	color |= (int)mapp(pos, coord_range, \
-	range((double)(src_color >> 8 & 0xFF), (double)(dst_color >> 8 & 0xFF))) << 8;
+	range((double)(src_color >> 8 & 0xFF), \
+	(double)(dst_color >> 8 & 0xFF))) << 8;
 	color |= (int)mapp(pos, coord_range, \
 	range((double)(src_color & 0xFF), (double)(dst_color & 0xFF)));
 	return (color);
@@ -45,7 +58,7 @@ double	lerp(double norm, double min, double max)
 double	norm(double value, double min, double max)
 {
 	if (min == max)
-		return (0.0);
+		return (1.0);
 	return ((value - min) / (max - min));
 }
 
@@ -53,4 +66,3 @@ double	mapp(double value, t_range src, t_range dst)
 {
 	return (lerp(norm(value, src.min, src.max), dst.min, dst.max));
 }
-

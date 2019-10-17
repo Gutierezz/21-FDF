@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:37:26 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:47:41 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
 # include "libft.h"
 # include "mlx.h"
 # include "ft_printf.h"
-//# include "keys.h"
-#include "linux_keys.h"
+# include "keys.h"
+//# include "linux_keys.h"
 
 # include <math.h>
 # include <fcntl.h>
@@ -43,6 +55,7 @@ typedef enum	s_err
 # define TRUE_ISO_ANGLE 0.523599
 # define _2_1_ISO_ANGLE 0.46373398
 
+# define MW map->width
 # define INDEX(x, y, size) (y * size + x)
 
 typedef	struct			s_range
@@ -153,7 +166,7 @@ typedef struct			s_fdf
 
 t_map	*read_map(int fd, t_palette palette);
 int		read_line(char **line_arr, t_map *map);
-int		fill_arr_from_list(t_map *map);
+int		fill_array(t_map *map);
 void	set_colors(t_map *map);
 
 /*

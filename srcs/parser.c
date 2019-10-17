@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:38:20 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:54:08 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-t_map	*read_map(int fd, t_palette palette)
+t_map			*read_map(int fd, t_palette palette)
 {
-	int		brd;
-	char	*line;
-	char	**line_arr;
-	t_map	*map;
-	int		err;
+	int			brd;
+	char		*line;
+	char		**line_arr;
+	t_map		*map;
+	int			err;
 
 	err = 0;
 	line = NULL;
@@ -29,7 +41,7 @@ t_map	*read_map(int fd, t_palette palette)
 	return (map);
 }
 
-int	read_line(char **line_arr, t_map *map)
+int				read_line(char **line_arr, t_map *map)
 {
 	int			i;
 	int			width;
@@ -52,13 +64,14 @@ int	read_line(char **line_arr, t_map *map)
 	return (0);
 }
 
-int	fill_arr_from_list(t_map *map)
+int				fill_array(t_map *map)
 {
 	t_pointlst	*ptr;
 	int			x;
 	int			y;
 
-	if (!(map->points = (t_point**)ft_memalloc(sizeof(t_point*) * map->height)) || \
+	if (!(map->points = \
+	(t_point**)ft_memalloc(sizeof(t_point*) * map->height)) || \
 	!(map->start_z = (int*)ft_memalloc(sizeof(int) * map->width * map->height)))
 		return (MEM_ALLOC_ERR);
 	ptr = map->file_data;
@@ -66,7 +79,7 @@ int	fill_arr_from_list(t_map *map)
 	while (y--)
 	{
 		x = map->width;
-		if (!(map->points[y] = (t_point*)ft_memalloc(sizeof(t_point) * map->width)))
+		if (!(map->points[y] = (t_point*)ft_memalloc(sizeof(t_point) * MW)))
 			return (MEM_ALLOC_ERR);
 		while (x--)
 		{
@@ -80,10 +93,10 @@ int	fill_arr_from_list(t_map *map)
 	return (0);
 }
 
-void	set_colors(t_map *map)
+void			set_colors(t_map *map)
 {
-	int y;
-	int x;
+	int			y;
+	int			x;
 
 	y = -1;
 	while (++y < map->height)

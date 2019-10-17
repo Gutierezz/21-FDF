@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pointlist.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:38:24 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:41:37 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-t_pointlst 	*new_node(char *line)
+t_pointlst		*new_node(char *line)
 {
 	char		**arr;
 	t_pointlst	*point;
@@ -16,7 +28,8 @@ t_pointlst 	*new_node(char *line)
 	}
 	(ft_check_base(arr[0], 10)) ? point->z = ft_atoi(arr[0]) : err++;
 	if (arr[1])
-		(ft_check_base(arr[1], 16)) ? point->color = ft_atoi_base(arr[1], 16) : err++;
+		(ft_check_base(arr[1], 16)) ? point->color = \
+		ft_atoi_base(arr[1], 16) : err++;
 	else
 		point->color = -1;
 	ft_string_array_del(arr);
@@ -25,7 +38,7 @@ t_pointlst 	*new_node(char *line)
 	return (point);
 }
 
-void	pointlist_add(t_pointlst **head, t_pointlst *new)
+void			pointlist_add(t_pointlst **head, t_pointlst *new)
 {
 	t_pointlst	*tmp;
 
@@ -39,7 +52,7 @@ void	pointlist_add(t_pointlst **head, t_pointlst *new)
 	}
 }
 
-void	pointlist_clear(t_pointlst **head)
+void			pointlist_clear(t_pointlst **head)
 {
 	t_pointlst *tmp;
 

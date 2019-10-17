@@ -1,8 +1,20 @@
-#include  "fdf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/17 14:38:10 by ttroll            #+#    #+#             */
+/*   Updated: 2019/10/17 14:48:44 by ttroll           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
 
 static t_palette	handle_args(int ac, char **av, int *fd)
 {
-	t_palette palette;
+	t_palette		palette;
 
 	palette = DEFAULT;
 	if (ac < 2 && ac > 3)
@@ -23,12 +35,11 @@ static t_palette	handle_args(int ac, char **av, int *fd)
 	return (palette);
 }
 
-
-int main(int ac, char **av)
+int					main(int ac, char **av)
 {
 	t_fdf		*fdf;
 	t_map		*map;
-	int 		fd;
+	int			fd;
 	int			err;
 	t_palette	palette;
 
@@ -37,7 +48,7 @@ int main(int ac, char **av)
 	palette = handle_args(ac, av, &fd);
 	map = read_map(fd, palette);
 	if ((map->width < 2 && map->height < 2) || \
-	(err = fill_arr_from_list(map)))
+	(err = fill_array(map)))
 		map_clear(&map, err ? err : EMPTY_FILE);
 	set_colors(map);
 	fdf = fdf_init(map, av[1]);
