@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 22:05:22 by ttroll            #+#    #+#             */
-/*   Updated: 2019/09/14 16:08:24 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:27:23 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char				*ft_str_gapjoin(const char *s1, const char *s2, char gap);
 char				*ft_str_gapjoin_free(char **s1, char **s2, char gap);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
-void                ft_string_array_del(char **arr);
+void				ft_string_array_del(char **arr);
 
 int					ft_putchar(char c);
 void				ft_putstr(char const *s);

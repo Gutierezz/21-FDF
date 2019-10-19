@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 14:00:43 by ttroll            #+#    #+#             */
-/*   Updated: 2019/04/10 20:21:55 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/09/11 15:47:33 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,21 +60,15 @@ char		*fill_precision(t_ft_pf *spc, t_pf_number *num)
 	int		i;
 
 	i = 0;
-	if (zero_with_zero_prec(spc, num))
-	{
-		num->nb_len = 0;
-		nb_str = ft_strdup("");
-	}
-	else
-		nb_str = ft_ulltoa_base((pf_is_unsigned(spc->type) || \
-	spc->type == 'p' ? num->value->ui : (unsigned long long)(PF_ABS(num->value->i))), num->base);
+	nb_str = number_string(spc, num);
 	if (num->base == 16 && (spc->type == 'X'))
 	{
 		while (nb_str[i])
 			(ft_isalpha(nb_str[i])) ? nb_str[i++] -= 32 : nb_str[i++];
 		i = 0;
 	}
-	pr_st = ft_strnew(((int)num->nb_len > spc->prec) ? (int)num->nb_len : spc->prec);
+	pr_st = ft_strnew(((int)num->nb_len > spc->prec) ? \
+		(int)num->nb_len : spc->prec);
 	while (i < (spc->prec - (int)num->nb_len))
 		pr_st[i++] = '0';
 	ft_strcpy((pr_st + i), nb_str);

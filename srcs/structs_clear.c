@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:43 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:40:19 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:38:41 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	map_clear(t_map **map, int err_msg)
 
 void	fdf_clear(t_fdf **fdf, int err_msg)
 {
-	ft_printf("FDF_CLEAR!\n");
 	if (*fdf)
 	{
 		map_clear(&(*fdf)->map, 0);

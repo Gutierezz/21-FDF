@@ -6,7 +6,7 @@
 #    By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 15:07:36 by ttroll            #+#    #+#              #
-#    Updated: 2019/10/17 15:08:02 by ttroll           ###   ########.fr        #
+#    Updated: 2019/10/19 15:18:08 by ttroll           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIB 		= $(LIB_DIR)/libft.a
 
 FLAGS 		= -Wall -Wextra -Werror
 LIB_LINK	= -lm -L $(LIB_DIR) -lft
-MLX_LINK 	= -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit #-lXext -lX11
+MLX_LINK 	= -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 SRC_FILES 	= main.c draw_map.c image_functions.c structs_init.c \
 structs_clear.c pointlist.c parser.c projection.c rotation.c hook_commands.c \

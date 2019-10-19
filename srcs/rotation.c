@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:37 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 20:30:10 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 11:55:10 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ void	z_rotation(t_point *point, double angle)
 
 void	rotate(t_point *point, t_fdf *fdf)
 {
-	if (fdf->view->proj == ISO)
-	{
-		x_rotation(point, fdf->view->x_rad);
-		y_rotation(point, fdf->view->y_rad);
-	}
+	x_rotation(point, fdf->view->x_rad);
+	y_rotation(point, fdf->view->y_rad);
 	z_rotation(point, fdf->view->z_rad);
 }

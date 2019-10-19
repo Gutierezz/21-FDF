@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:05 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 18:02:54 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 15:55:20 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 void		move_image(int key, t_fdf *fdf)
 {
-	if (abs(fdf->view->y_offs) < WIN_H)
-	{
-		if (key == VK_UP)
-			fdf->view->y_offs -= MOVE_STEP;
-		if (key == VK_DOWN)
-			fdf->view->y_offs += MOVE_STEP;
-	}
-	if (abs(fdf->view->x_offs) < WIN_W)
-	{
-		if (key == VK_RIGHT)
-			fdf->view->x_offs += MOVE_STEP;
-		if (key == VK_LEFT)
-			fdf->view->x_offs -= MOVE_STEP;
-	}
-	ft_printf("x_offs %d y_offs %d\n", fdf->view->x_offs, fdf->view->y_offs);
+	if (key == VK_UP && fdf->view->y_offs > -WIN_H * fdf->view->scale)
+		fdf->view->y_offs -= MOVE_STEP;
+	if (key == VK_DOWN && fdf->view->y_offs < WIN_H * fdf->view->scale)
+		fdf->view->y_offs += MOVE_STEP;
+	if (key == VK_RIGHT && fdf->view->x_offs < WIN_W * fdf->view->scale)
+		fdf->view->x_offs += MOVE_STEP;
+	if (key == VK_LEFT && fdf->view-> x_offs > -WIN_W * fdf->view->scale)
+		fdf->view->x_offs -= MOVE_STEP;
 }
 
 void		set_scale(int key, t_fdf *fdf)
@@ -41,7 +34,6 @@ void		set_scale(int key, t_fdf *fdf)
 
 void		rotate_image(int key, t_fdf *fdf)
 {
-	(void)key;
 	if (key == VK_NUM_2)
 		fdf->view->y_rad += ROTATE_STEP;
 	else if (key == VK_NUM_8)
@@ -54,18 +46,18 @@ void		rotate_image(int key, t_fdf *fdf)
 		fdf->view->x_rad += ROTATE_STEP;
 	else if (key == VK_NUM_7 || key == VK_NUM_9)
 		fdf->view->x_rad -= ROTATE_STEP;
+	if (fdf->view->x_rad > CIRLCE_RAD || fdf->view->x_rad < -CIRLCE_RAD)
+		fdf->view->x_rad -= fdf->view->x_rad > CIRLCE_RAD ? \
+		CIRLCE_RAD : -CIRLCE_RAD;
+	if (fdf->view->y_rad > CIRLCE_RAD || fdf->view->y_rad < -CIRLCE_RAD)
+		fdf->view->y_rad -= fdf->view->y_rad > CIRLCE_RAD ? \
+		CIRLCE_RAD : -CIRLCE_RAD;
+	if (fdf->view->z_rad > CIRLCE_RAD || fdf->view->z_rad < -CIRLCE_RAD)
+		fdf->view->z_rad -= fdf->view->z_rad > CIRLCE_RAD ? \
+		CIRLCE_RAD : -CIRLCE_RAD;
 }
 
-/*
-** if (fdf->view->x_rad > CIRLCE_RAD || fdf->view->x_rad < -CIRLCE_RAD)
-** fdf->view->x_rad -= fdf->view->x_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
-** if (fdf->view->y_rad > CIRLCE_RAD || fdf->view->y_rad < -CIRLCE_RAD)
-** fdf->view->y_rad -= fdf->view->y_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
-** if (fdf->view->z_rad > CIRLCE_RAD || fdf->view->z_rad < -CIRLCE_RAD)
-** fdf->view->z_rad -= fdf->view->z_rad > CIRLCE_RAD ? CIRLCE_RAD : -CIRLCE_RAD;
-*/
-
-void		set_project_type(int key,t_fdf *fdf)
+void		set_project_type(int key, t_fdf *fdf)
 {
 	fdf->view->x_rad = 0.0;
 	fdf->view->y_rad = 0.0;

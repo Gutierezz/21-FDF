@@ -6,10 +6,9 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:37:52 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:51:14 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:38:26 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "fdf.h"
 
@@ -46,10 +45,6 @@ int		key_press(int key, t_fdf *fdf)
 
 void	hook_commands(t_fdf *fdf)
 {
-	// mlx_hook(fdf->win, 4, 0, mouse_press, fdf);
-	// mlx_hook(fdf->win, 4, 0, mouse_release, fdf);
-	// mlx_hook(fdf->win, 4, 0, mouse_move, fdf);
-	//mlx_hook(fdf->win, 2, (1L<<0), key_press, fdf);
-	mlx_key_hook(fdf->win, key_press, fdf);
+	mlx_hook(fdf->win, 2, 0, key_press, fdf);
 	mlx_hook(fdf->win, 17, 0, close_window, fdf);
 }

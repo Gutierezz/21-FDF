@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 16:01:53 by ttroll            #+#    #+#             */
-/*   Updated: 2019/04/22 17:03:10 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:41:21 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int					compare_size_int(int new_index, int old_index);
 int					right_align_with_zero_padding(t_ft_pf *s, \
 					t_pf_number *num, size_t len);
 unsigned int		get_int_base(char c);
+char				*number_string(t_ft_pf *spec, t_pf_number *num);
 
 /*
 ** ft_printf

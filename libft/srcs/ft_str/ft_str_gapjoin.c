@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_gapjoin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ttroll <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 19:06:50 by ttroll            #+#    #+#             */
-/*   Updated: 2019/03/31 19:07:43 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:03:56 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static char		*helper(const char *str, char gap)
 	return (new_str);
 }
 
-char		*ft_str_gapjoin(const char *s1, const char *s2, char gap)
+char			*ft_str_gapjoin(const char *s1, const char *s2, char gap)
 {
-	size_t	i;
-	size_t	j;
-	char	*str;
+	size_t		i;
+	size_t		j;
+	char		*str;
 
 	j = 0;
 	i = 0;
@@ -49,7 +49,7 @@ char		*ft_str_gapjoin(const char *s1, const char *s2, char gap)
 		*(str + i) = *(s1 + i);
 		i++;
 	}
-	if (i > 0 && *(str +  i - 1) != gap)
+	if (i > 0 && *(str + i - 1) != gap)
 		*(str + i++) = gap;
 	while (*(s2 + j))
 		*(str + i++) = *(s2 + j++);

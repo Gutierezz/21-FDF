@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:32:11 by ttroll            #+#    #+#             */
-/*   Updated: 2019/04/10 13:24:32 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:13:48 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_atoi_base(const char *str, int base)
 	if (base == 10 && (str[i] == '+' || str[i] == '-'))
 		sign = (str[i++] == '-') ? -1 : 1;
 	if (base != 10 && !(pref_offs = ft_skip_prefix(&str[i], base)))
-		return(nb);
+		return (nb);
 	i += pref_offs;
 	while ((ft_is_base_digit(str[i], base) >= 0))
 		nb = nb * base + ft_is_base_digit(str[i++], base);

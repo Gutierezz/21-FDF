@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 14:00:18 by ttroll            #+#    #+#             */
-/*   Updated: 2019/04/11 11:15:45 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/09/11 15:45:37 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,20 @@ unsigned int	get_int_base(char c)
 	if (c == 'o' || c == 'O')
 		return (8);
 	return (0);
+}
+
+char			*number_string(t_ft_pf *spec, t_pf_number *num)
+{
+	char		*nb_str;
+
+	if (zero_with_zero_prec(spec, num))
+	{
+		num->nb_len = 0;
+		nb_str = ft_strdup("");
+	}
+	else
+		nb_str = ft_ulltoa_base((pf_is_unsigned(spec->type) || \
+	spec->type == 'p' ? num->value->ui : \
+		(unsigned long long)(PF_ABS(num->value->i))), num->base);
+	return (nb_str);
 }

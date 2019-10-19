@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 22:05:22 by ttroll            #+#    #+#             */
-/*   Updated: 2019/04/12 13:14:27 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:24:45 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int		partition(int *arr, int start, int end)
 {
-	int	pivot;
-	int	i;
-	int	j;
+	int			pivot;
+	int			i;
+	int			j;
 
 	i = start;
 	j = end;
@@ -34,16 +34,16 @@ static int		partition(int *arr, int start, int end)
 	}
 }
 
-int		quick_select(int *arr, int start, int end, int k)
+int				quick_select(int *arr, int start, int end, int k)
 {
-	int	middle;
+	int			middle;
 
 	middle = 0;
 	while (1)
 	{
 		middle = partition(arr, start, end);
 		if (middle == k)
-			return arr[middle];
+			return (arr[middle]);
 		else if (k < middle)
 			end = middle;
 		else

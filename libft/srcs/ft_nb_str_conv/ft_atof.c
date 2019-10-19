@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 12:03:19 by ttroll            #+#    #+#             */
-/*   Updated: 2019/03/31 19:59:43 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:13:10 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	initialize(int *sign, double *pos, size_t *i, double *res)
 
 double		ft_atof(const char *str)
 {
-	double	    res;
-	long long   integer;
-	size_t	    i;
-	double	    pos;
-	int		    sign;
+	double		res;
+	long long	integer;
+	size_t		i;
+	double		pos;
+	int			sign;
 
 	initialize(&sign, &pos, &i, &res);
 	integer = ft_atoll(str);

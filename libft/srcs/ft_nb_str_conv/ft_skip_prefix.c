@@ -6,12 +6,11 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 12:32:11 by ttroll            #+#    #+#             */
-/*   Updated: 2019/04/10 13:24:32 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 16:13:36 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
 
 int	ft_skip_prefix(const char *str, int base)
 {
