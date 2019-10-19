@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:43 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/19 16:38:41 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/19 17:31:26 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	fdf_clear(t_fdf **fdf, int err_msg)
 			mlx_destroy_image((*fdf)->mlx, (*fdf)->img);
 		if ((*fdf)->win)
 			mlx_destroy_window((*fdf)->mlx, (*fdf)->win);
-		// ft_memdel((void**)&(*fdf)->data);
-		// ft_memdel((void**)&(*fdf)->img);
 		ft_memdel((void**)&(*fdf)->view);
 		ft_memdel((void**)&(*fdf)->mlx);
 		ft_memdel((void**)fdf);
