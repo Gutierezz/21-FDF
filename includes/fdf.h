@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:37:26 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/19 16:37:37 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/20 10:22:51 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ typedef struct				s_view
 	double					x_rad;
 	double					y_rad;
 	double					z_rad;
+	int						z_buffed;
 	int						x_offs;
 	int						y_offs;
 }							t_view;

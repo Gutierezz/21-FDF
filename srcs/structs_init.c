@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:49 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:39:30 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/20 10:23:06 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_view		*view_init(t_map *map)
 	view->x_rad = 0.0;
 	view->y_rad = 0.0;
 	view->z_rad = 0.0;
+	view->z_buffed = 0;
 	view->scale = PF_MIN(WIN_H / map->width, WIN_W / map->height);
 	view->h_scale = (map->z_max == map->z_min) ? 1 : \
 		view->scale / (map->z_max - map->z_min) + 1;

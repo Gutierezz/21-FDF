@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:37:40 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/17 14:49:55 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/20 10:25:15 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int			is_visible(int x, int y, int z_val, t_fdf *fdf)
 {
 	if (x >= 0 && x < WIN_W && y >= 0 && y < WIN_H)
 	{
-		if (z_val > fdf->map->z_buff[INDEX(x, y, WIN_W)])
+		if (!fdf->view->z_buffed)
+			return (1);
+		else if (z_val > fdf->map->z_buff[INDEX(x, y, WIN_W)])
 		{
 			fdf->map->z_buff[INDEX(x, y, WIN_W)] = z_val;
 			return (1);

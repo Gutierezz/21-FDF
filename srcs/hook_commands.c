@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:37:52 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/19 16:38:26 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/20 10:24:37 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		key_press(int key, t_fdf *fdf)
 		rotate_image(key, fdf);
 	else if (key == VK_I || key == VK_P)
 		set_project_type(key, fdf);
+	else if (key == VK_Z)
+		fdf->view->z_buffed = fdf->view->z_buffed ? 0 : 1;
 	apply_changes(fdf);
 	draw_map(fdf);
 	return (0);
