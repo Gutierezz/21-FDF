@@ -6,7 +6,7 @@
 /*   By: ttroll <ttroll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:38:10 by ttroll            #+#    #+#             */
-/*   Updated: 2019/10/19 17:20:43 by ttroll           ###   ########.fr       */
+/*   Updated: 2019/10/20 10:46:58 by ttroll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					main(int ac, char **av)
 	(err = fill_array(map)))
 		map_clear(&map, err ? err : EMPTY_FILE);
 	set_colors(map);
+	close(fd);
 	fdf = fdf_init(map, av[1]);
 	hook_commands(fdf);
 	apply_changes(fdf);
